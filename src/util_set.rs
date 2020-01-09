@@ -1,6 +1,5 @@
 use ::libc;
-#[c2rust::header_src =
-  "/home/nmavis/dev/gssapi-rs/code/src/lib/gssapi/generic/gssapiP_generic.h:28"]
+#[c2rust::header_src = "/home/nmavis/dev/gssapi-rs/code/src/lib/gssapi/generic/gssapiP_generic.h:28"]
 pub mod gssapiP_generic_h {
     #[c2rust::src_loc = "122:1"]
     pub type g_set_elt = *mut _g_set_elt;
@@ -19,7 +18,8 @@ pub mod stdlib_h {
     }
 }
 pub use self::gssapiP_generic_h::g_set_elt;
-use self::stdlib_h::{malloc, free};
+use self::stdlib_h::free;
+use self::stdlib_h::malloc;
 /* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 /*
  * Copyright 1995 by OpenVision Technologies, Inc.
@@ -47,7 +47,8 @@ use self::stdlib_h::{malloc, free};
  */
 
 #[repr(C)]
-#[c2rust::src_loc = "30:8"]#[derive(Copy, Clone)]
+#[c2rust::src_loc = "30:8"]
+#[derive(Copy, Clone)]
 pub struct _g_set_elt {
     pub key: *mut libc::c_void,
     pub value: *mut libc::c_void,
@@ -55,33 +56,34 @@ pub struct _g_set_elt {
 }
 #[no_mangle]
 #[c2rust::src_loc = "36:1"]
-pub unsafe extern "C" fn gssint_g_set_init(mut s: *mut g_set_elt)
- -> i32 {
+pub unsafe extern "C" fn gssint_g_set_init(mut s: *mut g_set_elt) -> i32 {
     *s = 0 as g_set_elt;
-    return 0 as i32;
+    return 0i32;
 }
 #[no_mangle]
 #[c2rust::src_loc = "43:1"]
-pub unsafe extern "C" fn gssint_g_set_entry_add(mut s: *mut g_set_elt,
-                                                mut key: *mut libc::c_void,
-                                                mut value: *mut libc::c_void)
- -> i32 {
+pub unsafe extern "C" fn gssint_g_set_entry_add(
+    mut s: *mut g_set_elt,
+    mut key: *mut libc::c_void,
+    mut value: *mut libc::c_void,
+) -> i32 {
     let mut first = 0 as *mut _g_set_elt;
-    first =
-        malloc(::std::mem::size_of::<_g_set_elt>() as usize) as
-            *mut _g_set_elt;
-    if first.is_null() { return 12 as i32 }
+    first = malloc(::std::mem::size_of::<_g_set_elt>()) as *mut _g_set_elt;
+    if first.is_null() {
+        return 12i32;
+    }
     (*first).key = key;
     (*first).value = value;
     (*first).next = *s;
     *s = first;
-    return 0 as i32;
+    return 0i32;
 }
 #[no_mangle]
 #[c2rust::src_loc = "59:1"]
-pub unsafe extern "C" fn gssint_g_set_entry_delete(mut s: *mut g_set_elt,
-                                                   mut key: *mut libc::c_void)
- -> i32 {
+pub unsafe extern "C" fn gssint_g_set_entry_delete(
+    mut s: *mut g_set_elt,
+    mut key: *mut libc::c_void,
+) -> i32 {
     let mut p = 0 as *mut g_set_elt;
     p = s;
     while !(*p).is_null() {
@@ -89,25 +91,28 @@ pub unsafe extern "C" fn gssint_g_set_entry_delete(mut s: *mut g_set_elt,
             let mut next = (**p).next;
             free(*p as *mut libc::c_void);
             *p = next;
-            return 0 as i32
+            return 0i32;
         }
         p = &mut (**p).next
     }
-    return -(1 as i32);
+    return -(1i32);
 }
 #[no_mangle]
 #[c2rust::src_loc = "76:1"]
-pub unsafe extern "C" fn gssint_g_set_entry_get(mut s: *mut g_set_elt,
-                                                mut key: *mut libc::c_void,
-                                                mut value:
-                                                    *mut *mut libc::c_void)
- -> i32 {
+pub unsafe extern "C" fn gssint_g_set_entry_get(
+    mut s: *mut g_set_elt,
+    mut key: *mut libc::c_void,
+    mut value: *mut *mut libc::c_void,
+) -> i32 {
     let mut p = 0 as *mut _g_set_elt;
     p = *s;
     while !p.is_null() {
-        if (*p).key == key { *value = (*p).value; return 0 as i32 }
+        if (*p).key == key {
+            *value = (*p).value;
+            return 0i32;
+        }
         p = (*p).next
     }
     *value = 0 as *mut libc::c_void;
-    return -(1 as i32);
+    return -(1i32);
 }

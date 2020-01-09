@@ -34,10 +34,10 @@ prepare() {
   cd ${pkgname}-${pkgver}
 
   # cf https://bugs.gentoo.org/show_bug.cgi?id=448778
-  patch -p1 < "${srcdir}"/krb5-config_LDFLAGS.patch
+  patch -p1 < krb5-config_LDFLAGS.patch
 
   # FS#25384
-  sed -i "/KRB5ROOT=/s/\/local//" src/util/ac_check_krb5.m4
+  sed -i "/KRB5ROOT=/s/\/local//" util/ac_check_krb5.m4
 }
 
 build() {

@@ -11,25 +11,20 @@
 #![feature(register_tool)]
 #![register_tool(c2rust)]
 
-
-
 extern crate libc;
 
-
-
 pub mod src {
-pub mod disp_com_err_status;
-pub mod disp_major_status;
-pub mod gssapi_err_generic;
-pub mod gssapi_generic;
-pub mod oid_ops;
-pub mod rel_buffer;
-pub mod rel_oid_set;
-pub mod util_buffer;
-pub mod util_buffer_set;
-pub mod util_errmap;
-pub mod util_seqstate;
-pub mod util_set;
-pub mod util_token;
+    pub mod disp_com_err_status;
+    pub mod disp_major_status;
+    pub mod gssapi_err_generic;
+    pub mod gssapi_generic;
+    pub mod oid_ops;
+    pub mod rel_buffer;
+    pub mod rel_oid_set;
+    pub mod util_buffer;
+    pub mod util_buffer_set;
+    pub mod util_errmap;
+    pub mod util_seqstate;
+    pub mod util_set;
+    pub mod util_token;
 } // mod src
-

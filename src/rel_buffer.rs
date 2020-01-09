@@ -15,24 +15,24 @@ pub mod stdint_uintn_h {
     pub type uint32_t = __uint32_t;
     use super::types_h::__uint32_t;
 }
-#[c2rust::header_src =
-  "/home/nmavis/dev/gssapi-rs/code/src/include/gssapi/gssapi.h:30"]
+#[c2rust::header_src = "/home/nmavis/dev/gssapi-rs/code/src/include/gssapi/gssapi.h:30"]
 pub mod gssapi_h {
     #[c2rust::src_loc = "91:1"]
     pub type gss_uint32 = uint32_t;
     #[c2rust::src_loc = "104:1"]
     pub type OM_uint32 = gss_uint32;
-    
+
     #[repr(C)]
-    #[c2rust::src_loc = "117:16"]#[derive(Copy, Clone)]
+    #[c2rust::src_loc = "117:16"]
+    #[derive(Copy, Clone)]
     pub struct gss_buffer_desc_struct {
-        pub length: size_t,
+        pub length: usize,
         pub value: *mut libc::c_void,
     }
     #[c2rust::src_loc = "117:1"]
     pub type gss_buffer_t = *mut gss_buffer_desc_struct;
-    use super::stdint_uintn_h::uint32_t;
     use super::stddef_h::size_t;
+    use super::stdint_uintn_h::uint32_t;
     /* _GSSAPI_H_ */
 }
 #[c2rust::header_src = "/usr/include/stdlib.h:30"]
@@ -43,14 +43,13 @@ pub mod stdlib_h {
         pub fn free(__ptr: *mut libc::c_void);
     }
 }
-#[c2rust::header_src =
-  "/home/nmavis/dev/gssapi-rs/code/src/include/gssapi/gssapi_alloc.h:30"]
+#[c2rust::header_src = "/home/nmavis/dev/gssapi-rs/code/src/include/gssapi/gssapi_alloc.h:30"]
 pub mod gssapi_alloc_h {
     /* -*- mode: c; c-basic-offset: 4; indent-tabs-mode: nil -*- */
-/* To the extent possible under law, Painless Security, LLC has waived
- * all copyright and related or neighboring rights to GSS-API Memory
- * Management Header. This work is published from: United States.
- */
+    /* To the extent possible under law, Painless Security, LLC has waived
+     * all copyright and related or neighboring rights to GSS-API Memory
+     * Management Header. This work is published from: United States.
+     */
     /* not _WIN32 or DEBUG_GSSALLOC */
     /* Normal Unix case, just use free/malloc/calloc/realloc. */
     #[inline]
@@ -60,13 +59,15 @@ pub mod gssapi_alloc_h {
     }
     use super::stdlib_h::free;
 }
-pub use self::stddef_h::size_t;
-pub use self::types_h::__uint32_t;
-pub use self::stdint_uintn_h::uint32_t;
-pub use self::gssapi_h::{gss_uint32, OM_uint32, gss_buffer_desc_struct,
-                         gss_buffer_t};
-use self::stdlib_h::free;
 pub use self::gssapi_alloc_h::gssalloc_free;
+pub use self::gssapi_h::gss_buffer_desc_struct;
+pub use self::gssapi_h::gss_buffer_t;
+pub use self::gssapi_h::gss_uint32;
+pub use self::gssapi_h::OM_uint32;
+pub use self::stddef_h::size_t;
+pub use self::stdint_uintn_h::uint32_t;
+use self::stdlib_h::free;
+pub use self::types_h::__uint32_t;
 /* -*- mode: c; indent-tabs-mode: nil -*- */
 /*
  * Copyright 1993 by OpenVision Technologies, Inc.
@@ -94,8 +95,8 @@ pub use self::gssapi_alloc_h::gssalloc_free;
  */
 /* * helper macros **/
 /* this code knows that an int on the wire is 32 bits.  The type of
-   num should be at least this big, or the extra shifts may do weird
-   things */
+num should be at least this big, or the extra shifts may do weird
+things */
 /* * malloc wrappers; these may actually do something later */
 /* * helper functions **/
 /* hide names from applications, especially glib applications */
@@ -129,19 +130,21 @@ pub use self::gssapi_alloc_h::gssalloc_free;
  */
 #[no_mangle]
 #[c2rust::src_loc = "37:1"]
-pub unsafe extern "C" fn generic_gss_release_buffer(mut minor_status:
-                                                        *mut OM_uint32,
-                                                    mut buffer: gss_buffer_t)
- -> OM_uint32 {
+pub unsafe extern "C" fn generic_gss_release_buffer(
+    mut minor_status: *mut OM_uint32,
+    mut buffer: gss_buffer_t,
+) -> OM_uint32 {
     if !minor_status.is_null() {
-        *minor_status = 0 as i32 as OM_uint32
+        *minor_status = 0u32
     }
     /* if buffer is NULL, return */
-    if buffer.is_null() { return 0 as i32 as OM_uint32 }
+    if buffer.is_null() {
+        return 0u32;
+    }
     if !(*buffer).value.is_null() {
         gssalloc_free((*buffer).value);
-        (*buffer).length = 0 as i32 as size_t;
+        (*buffer).length = 0usize;
         (*buffer).value = 0 as *mut libc::c_void
     }
-    return 0 as i32 as OM_uint32;
+    return 0u32;
 }

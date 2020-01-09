@@ -14,10 +14,11 @@
 # select target 'pick_node(util_errmap:581:0)' ;
 
 
-# These are valid for LP64 systems, e.g., Linux and Mac OS,
+# These are valhttp://git.sourcefire.com/xentrickid for LP64 systems, e.g., Linux and Mac OS,
 # but not Windows which is LLP64 so these are always u32/i32
 rewrite_ty 'libc::c_ulong'     'usize' ;
 rewrite_ty 'libc::c_long'      'isize' ;
+rewrite_ty 'size_t'            'usize' ;
 type_fix_rules '*, u16, usize => __old as usize' '*, usize, u16 => __old as u16' ;
 type_fix_rules '*, u32, usize => __old as usize' '*, usize, u32 => __old as u32' ;
 type_fix_rules '*, u64, usize => __old as usize' '*, usize, u64 => __old as u64' ;
@@ -43,20 +44,20 @@ rewrite_ty 'libc::c_double'    'f64' ;
 rewrite_ty 'libc::c_char'      'i8' ;
 commit ;
 
+rewrite_ty 'OM_uint32'    'u32';
+rewrite_ty '*mut OM_uint32'    '*mut u32';
 
 # Random
-rewrite_expr 'return __t as i32 as isize' 'return __t' ;
+rewrite_ty 'OM_uint32'    'u32';
+rewrite_ty '*mut OM_uint32'    '*mut u32';
 commit ;
 
 # Why
-# rewrite_ty 'OM_uint32'    'u32';
-# rewrite_ty '*mut OM_uint32'    '*mut u32';
-# type_fix_rules '*, *mut __t, u32 => __old as isize' '*, isize, i64 => __old as i64' ;
-# commit ;
 
 # Replace types_h types with Rust equivalents
 # rewrite_ty '__uint8_t'   'u8' ;
-# rewrite_ty '__uint16_t'  'u16' ;
+# type_fix_rules '*, u8, usize => __old as usize' '*, usize, u8 => __old as u8' ;
+rewrite_ty '__uint16_t'  'u16' ;
 # rewrite_ty '__uint32_t'  'u32' ;
 # rewrite_ty '__uint64_t'  'u64' ;
 # rewrite_ty '__int8_t'    'i8' ;
@@ -81,27 +82,38 @@ commit ;
 # rewrite_ty 'time_t'    'isize' ;
 # commit ;
 
-# remove_literal_suffixes ;
+# Needed for one module.
+rename_unnamed ;
+commit ;
+
+# Great
+remove_redundant_casts ;
+commit ;
+
+remove_redundant_let_types ;
+commit ;
+
+# Remove loop labels not used in a named break or continue
+# remove_unused_labels ;
 # commit ;
 
-# rename_unnamed ;
-# commit ;
+
+fix_unused_unsafe ;
+commit ;
 
 # reorganize_definitions ;
 # commit ;
 
+
+
 # remove_redundant_casts ;
 # commit ;
 
-# canonicalize_externs ;
-# commit ;
-
-# canonicalize_structs ;
-# commit ;
-
-# fix_unused_unsafe ;
-# commit ;
 
 # link_funcs ;
 # commit ;
 
+# Does nothing
+
+# remove_literal_suffixes ;
+# commit ;

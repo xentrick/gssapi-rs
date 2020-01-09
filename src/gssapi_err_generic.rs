@@ -1,22 +1,22 @@
 use ::libc;
-#[c2rust::header_src =
-  "/home/nmavis/dev/gssapi-rs/code/src/include/com_err.h:47"]
+#[c2rust::header_src = "/home/nmavis/dev/gssapi-rs/code/src/include/com_err.h:47"]
 pub mod com_err_h {
     /*
- * Copyright 1988, Student Information Processing Board of the
- * Massachusetts Institute of Technology.
- *
- * Copyright 1995 by Cygnus Support.
- *
- * For copyright and distribution info, see the documentation supplied
- * with this package.
- */
+     * Copyright 1988, Student Information Processing Board of the
+     * Massachusetts Institute of Technology.
+     *
+     * Copyright 1995 by Cygnus Support.
+     *
+     * For copyright and distribution info, see the documentation supplied
+     * with this package.
+     */
     /* Header file for common error description library. */
     #[c2rust::src_loc = "26:1"]
     pub type errcode_t = isize;
-    
+
     #[repr(C)]
-    #[c2rust::src_loc = "30:8"]#[derive(Copy, Clone)]
+    #[c2rust::src_loc = "30:8"]
+    #[derive(Copy, Clone)]
     pub struct error_table {
         pub msgs: *const *const i8,
         pub base: isize,
@@ -30,72 +30,65 @@ pub mod com_err_h {
     }
     /* ! defined(__COM_ERR_H) */
 }
-pub use self::com_err_h::{errcode_t, error_table, add_error_table};
+pub use self::com_err_h::add_error_table;
+pub use self::com_err_h::errcode_t;
+pub use self::com_err_h::error_table;
 /* Lclint doesn't handle null annotations on arrays
-   properly, so we need this typedef in each
-   generated .c file.  */
+properly, so we need this typedef in each
+generated .c file.  */
 /*@-redef@*/
 #[c2rust::src_loc = "19:1"]
 pub type ncptr = *const i8;
 /*@null@*/
 /*@=redef@*/
 #[c2rust::src_loc = "22:20"]
-static mut text: [ncptr; 22] =
-    [b"No @ in SERVICE-NAME name string\x00" as *const u8 as
-         *const i8,
-     b"STRING-UID-NAME contains nondigits\x00" as *const u8 as
-         *const i8,
-     b"UID does not resolve to username\x00" as *const u8 as
-         *const i8,
-     b"Validation error\x00" as *const u8 as *const i8,
-     b"Couldn\'t allocate gss_buffer_t data\x00" as *const u8 as
-         *const i8,
-     b"Message context invalid\x00" as *const u8 as *const i8,
-     b"Buffer is the wrong size\x00" as *const u8 as *const i8,
-     b"Credential usage type is unknown\x00" as *const u8 as
-         *const i8,
-     b"Unknown quality of protection specified\x00" as *const u8 as
-         *const i8,
-     b"Local host name could not be determined\x00" as *const u8 as
-         *const i8,
-     b"Hostname in SERVICE-NAME string could not be canonicalized\x00" as
-         *const u8 as *const i8,
-     b"Mechanism is incorrect\x00" as *const u8 as *const i8,
-     b"Token header is malformed or corrupt\x00" as *const u8 as
-         *const i8,
-     b"Packet was replayed in wrong direction\x00" as *const u8 as
-         *const i8,
-     b"Token is missing data\x00" as *const u8 as *const i8,
-     b"Token was reflected\x00" as *const u8 as *const i8,
-     b"Received token ID does not match expected token ID\x00" as *const u8 as
-         *const i8,
-     b"The given credential\'s usage does not match the requested usage\x00"
-         as *const u8 as *const i8,
-     b"Storing of acceptor credentials is not supported by the mechanism\x00"
-         as *const u8 as *const i8,
-     b"Storing of non-default credentials is not supported by the mechanism\x00"
-         as *const u8 as *const i8,
-     b"mit-krb5\x00" as *const u8 as *const i8, 0 as ncptr];
+static mut text: [ncptr; 22] = [
+    b"No @ in SERVICE-NAME name string\x00" as *const u8 as *const i8,
+    b"STRING-UID-NAME contains nondigits\x00" as *const u8 as *const i8,
+    b"UID does not resolve to username\x00" as *const u8 as *const i8,
+    b"Validation error\x00" as *const u8 as *const i8,
+    b"Couldn\'t allocate gss_buffer_t data\x00" as *const u8 as *const i8,
+    b"Message context invalid\x00" as *const u8 as *const i8,
+    b"Buffer is the wrong size\x00" as *const u8 as *const i8,
+    b"Credential usage type is unknown\x00" as *const u8 as *const i8,
+    b"Unknown quality of protection specified\x00" as *const u8 as *const i8,
+    b"Local host name could not be determined\x00" as *const u8 as *const i8,
+    b"Hostname in SERVICE-NAME string could not be canonicalized\x00" as *const u8 as *const i8,
+    b"Mechanism is incorrect\x00" as *const u8 as *const i8,
+    b"Token header is malformed or corrupt\x00" as *const u8 as *const i8,
+    b"Packet was replayed in wrong direction\x00" as *const u8 as *const i8,
+    b"Token is missing data\x00" as *const u8 as *const i8,
+    b"Token was reflected\x00" as *const u8 as *const i8,
+    b"Received token ID does not match expected token ID\x00" as *const u8 as *const i8,
+    b"The given credential\'s usage does not match the requested usage\x00" as *const u8
+        as *const i8,
+    b"Storing of acceptor credentials is not supported by the mechanism\x00" as *const u8
+        as *const i8,
+    b"Storing of non-default credentials is not supported by the mechanism\x00" as *const u8
+        as *const i8,
+    b"mit-krb5\x00" as *const u8 as *const i8,
+    0 as ncptr,
+];
 #[no_mangle]
 #[c2rust::src_loc = "49:26"]
-pub static mut et_ggss_error_table: error_table =
-    unsafe {
-        {
-            let mut init =
-                error_table{msgs: text.as_ptr(),
-                            base: -(2045022976 as isize),
-                            n_msgs: 20 as i32 as u32,};
-            init
-        }
-    };
+pub static mut et_ggss_error_table: error_table = unsafe {
+    {
+        let mut init = error_table {
+            msgs: text.as_ptr(),
+            base: -(2045022976 as isize),
+            n_msgs: 20u32,
+        };
+        init
+    }
+};
 /*
  * et-c-gssapi_err_generic.c:
  * This file is automatically generated; please do not edit it.
  */
 #[no_mangle]
 #[c2rust::src_loc = "52:1"]
-pub unsafe extern "C" fn initialize_ggss_error_table() 
- /*@modifies internalState@*/
- {
+pub unsafe extern "C" fn initialize_ggss_error_table()
+/*@modifies internalState@*/
+{
     add_error_table(&et_ggss_error_table);
 }
