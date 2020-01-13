@@ -1,0 +1,26 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/kadmin/ktutil",
+    "arguments": [
+        "cc",
+        "-L../../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "ktutil",
+        "ktutil.o",
+        "ktutil_ct.o",
+        "ktutil_funcs.o",
+        "../../lib/libss.a",
+        "-ledit",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl"
+    ]
+}

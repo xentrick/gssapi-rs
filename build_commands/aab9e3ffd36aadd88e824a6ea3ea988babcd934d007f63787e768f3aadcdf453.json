@@ -1,0 +1,22 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/appl/user_user",
+    "arguments": [
+        "cc",
+        "-L../../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "uuclient",
+        "client.o",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl"
+    ]
+}

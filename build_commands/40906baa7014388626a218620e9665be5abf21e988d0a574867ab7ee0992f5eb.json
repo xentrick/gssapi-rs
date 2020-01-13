@@ -1,0 +1,29 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/clients/kinit",
+    "arguments": [
+        "cc",
+        "-L../../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "kinit",
+        "kinit.o",
+        "kinit_kdb.o",
+        "-lkadm5srv_mit",
+        "-lkdb5",
+        "-lgssrpc",
+        "-lgssapi_krb5",
+        "-lgssrpc",
+        "-lgssapi_krb5",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl"
+    ]
+}

@@ -110,7 +110,7 @@ KRB5INT_DES_DEPRECATED;
  * have an exact 32-bit int, and nothing should be looking inside a
  * des_key_schedule anyway.
  */
-typedef struct des_ks_struct {  DES_INT32 _[2]; } des_key_schedule[16]
+typedef struct des_ks_struct {  DES_INT32 _data[2]; } des_key_schedule[16]
 KRB5INT_DES_DEPRECATED;
 
 typedef des_cblock mit_des_cblock;

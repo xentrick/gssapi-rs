@@ -2,7 +2,7 @@
 #
 #
 
-DIR=/home/nmavis/dev/krb5/src/util/ss
+DIR=/home/nmavis/dev/gssapi-rs/code/src/util/ss
 AWK=gawk
 SED=sed
 

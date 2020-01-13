@@ -1,0 +1,26 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/kadm5_hook/test",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,kadm5_hook_test.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "kadm5_hook_test.so",
+        "main.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5",
+        "-lcom_err",
+        "-lk5crypto",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

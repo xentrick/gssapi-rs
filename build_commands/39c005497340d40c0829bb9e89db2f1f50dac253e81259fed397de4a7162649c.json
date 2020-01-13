@@ -1,0 +1,31 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/kadmin/cli",
+    "arguments": [
+        "cc",
+        "-L../../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "kadmin",
+        "kadmin.o",
+        "kadmin_ct.o",
+        "ss_wrapper.o",
+        "getdate.o",
+        "keytab.o",
+        "../../lib/libss.a",
+        "-ledit",
+        "-lkadm5clnt_mit",
+        "-lgssrpc",
+        "-lgssapi_krb5",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl"
+    ]
+}

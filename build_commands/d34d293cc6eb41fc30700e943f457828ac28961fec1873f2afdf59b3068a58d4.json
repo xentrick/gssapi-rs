@@ -1,0 +1,25 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/util/verto",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,libverto.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "libverto.so.0.0",
+        "verto.so",
+        "module.so",
+        "verto-k5ev.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../lib",
+        "-lkeyutils",
+        "-lresolv",
+        "-lm",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

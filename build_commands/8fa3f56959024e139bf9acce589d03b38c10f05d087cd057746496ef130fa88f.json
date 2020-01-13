@@ -1,0 +1,29 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/preauth/test",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,test.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "test.so",
+        "cltest.so",
+        "kdctest.so",
+        "common.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

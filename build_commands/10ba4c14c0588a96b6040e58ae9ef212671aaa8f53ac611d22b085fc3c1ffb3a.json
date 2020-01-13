@@ -1,0 +1,27 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/tests/verify",
+    "arguments": [
+        "cc",
+        "-L../../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "kdb5_verify",
+        "kdb5_verify.o",
+        "-lkdb5",
+        "-lgssrpc",
+        "-lgssapi_krb5",
+        "-pthread",
+        "-ldl",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl"
+    ]
+}

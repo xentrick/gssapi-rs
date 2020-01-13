@@ -1,0 +1,28 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/audit/test",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,k5audit_test.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "k5audit_test.so",
+        "au_test.so",
+        "../kdc_j_encode.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

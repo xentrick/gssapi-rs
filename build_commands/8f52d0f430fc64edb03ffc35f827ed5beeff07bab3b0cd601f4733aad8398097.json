@@ -1,0 +1,30 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/kprop",
+    "arguments": [
+        "cc",
+        "-L../lib",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-O0",
+        "-o",
+        "kpropd",
+        "kpropd.o",
+        "kpropd_rpc.o",
+        "kprop_util.o",
+        "-lkdb5",
+        "-lkadm5clnt_mit",
+        "-lgssrpc",
+        "-lgssapi_krb5",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl",
+        "-lapputils",
+        "-lutil"
+    ]
+}

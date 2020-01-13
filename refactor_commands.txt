@@ -1,24 +1,10 @@
-# Fix import error on initial transpile for `util_errmap.rs`
-# `gss_OID_desc` is not imported and in scope at `util_errmap.rs:449:48`
-# select target 'crate; desc(name("mecherrmap")); mark(target)' ;
-# select target 'crate; child(kind(item));' print_spans;
-
-
-# select target 'item(gss_name_struct);' ;
-# debug_match_expr
-#   'mecherrmap';
-# rewrite_expr
-  # 'gss_OID_desc' ;
-# commit ;
-
-# select target 'pick_node(util_errmap:581:0)' ;
-
-
 # These are valhttp://git.sourcefire.com/xentrickid for LP64 systems, e.g., Linux and Mac OS,
 # but not Windows which is LLP64 so these are always u32/i32
 rewrite_ty 'libc::c_ulong'     'usize' ;
 rewrite_ty 'libc::c_long'      'isize' ;
 rewrite_ty 'size_t'            'usize' ;
+rewrite_ty 'DES_INT32'    'isize' ;
+rewrite_ty 'DES_UINT32'    'usize ;
 type_fix_rules '*, u16, usize => __old as usize' '*, usize, u16 => __old as u16' ;
 type_fix_rules '*, u32, usize => __old as usize' '*, usize, u32 => __old as u32' ;
 type_fix_rules '*, u64, usize => __old as usize' '*, usize, u64 => __old as u64' ;
@@ -41,49 +27,20 @@ rewrite_ty 'libc::c_ulonglong' 'u64' ;
 rewrite_ty 'libc::c_longlong'  'i64' ;
 rewrite_ty 'libc::c_float'     'f32' ;
 rewrite_ty 'libc::c_double'    'f64' ;
-rewrite_ty 'libc::c_char'      'i8' ;
+rewrite_ty 'libc::c_char'      'i8'  ;
 commit ;
 
-rewrite_ty 'OM_uint32'    'u32';
-rewrite_ty '*mut OM_uint32'    '*mut u32';
-
-# Random
-rewrite_ty 'OM_uint32'    'u32';
-rewrite_ty '*mut OM_uint32'    '*mut u32';
+# krb5 types
+rewrite_ty 'OM_uint32'    'u32' ;
+rewrite_ty 'gss_int32'                  'u32' ;
+rewrite_ty 'gss_uint32'                  'u32' ;
 commit ;
-
-# Why
-
-# Replace types_h types with Rust equivalents
-# rewrite_ty '__uint8_t'   'u8' ;
-# type_fix_rules '*, u8, usize => __old as usize' '*, usize, u8 => __old as u8' ;
-rewrite_ty '__uint16_t'  'u16' ;
-# rewrite_ty '__uint32_t'  'u32' ;
-# rewrite_ty '__uint64_t'  'u64' ;
-# rewrite_ty '__int8_t'    'i8' ;
-# rewrite_ty '__int16_t'   'i16' ;
-# rewrite_ty '__int32_t'   'i32' ;
-# rewrite_ty '__int64_t'   'i64' ;
-# rewrite_ty '__off_t'     'isize' ;
-# rewrite_ty '__off64_t'   'isize' ;
-# rewrite_ty '__time_t'    'isize' ;
-# commit ;
-
-# rewrite_ty 'uint8_t'   'u8' ;
-# rewrite_ty 'uint16_t'  'u16' ;
-# rewrite_ty 'uint32_t'  'u32' ;
-# rewrite_ty 'uint64_t'  'u64' ;
-# rewrite_ty 'int8_t'    'i8' ;
-# rewrite_ty 'int16_t'   'i16' ;
-# rewrite_ty 'int32_t'   'i32' ;
-# rewrite_ty 'int64_t'   'i64' ;
-# rewrite_ty 'off_t'     'isize' ;
-# rewrite_ty 'off64_t'   'isize' ;
-# rewrite_ty 'time_t'    'isize' ;
-# commit ;
 
 # Needed for one module.
 rename_unnamed ;
+commit ;
+
+reorganize_definitions ;
 commit ;
 
 # Great
@@ -94,26 +51,14 @@ remove_redundant_let_types ;
 commit ;
 
 # Remove loop labels not used in a named break or continue
-# remove_unused_labels ;
-# commit ;
-
-
-fix_unused_unsafe ;
+remove_unused_labels ;
 commit ;
 
-# reorganize_definitions ;
+# fix_unused_unsafe ;
 # commit ;
 
 
+# # Does nothing
 
-# remove_redundant_casts ;
-# commit ;
-
-
-# link_funcs ;
-# commit ;
-
-# Does nothing
-
-# remove_literal_suffixes ;
-# commit ;
+# # remove_literal_suffixes ;
+# # commit ;

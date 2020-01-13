@@ -1,0 +1,25 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/tls/k5tls",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,k5tls.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "k5tls.so",
+        "openssl.so",
+        "notls.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5",
+        "-lkrb5support",
+        "-lssl",
+        "-lcrypto",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

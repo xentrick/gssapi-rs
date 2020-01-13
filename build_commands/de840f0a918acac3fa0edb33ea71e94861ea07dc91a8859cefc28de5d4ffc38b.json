@@ -1,0 +1,22 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/tests/softpkcs11",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,softpkcs11.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "softpkcs11.so",
+        "main.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../lib",
+        "-lkrb5support",
+        "-lcrypto",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

@@ -1,0 +1,16 @@
+# Needed for one module.
+# rename_unnamed ;
+# commit ;
+
+# rewrite_ty '__va_list_tag'  '::std::ffi::VaList' ;
+# commit ;
+
+# select target 'item(src::kadmin::cli::kadmin::comm_err_h)'; item("/home/nmavis/dev/gssapi-rs/code/src/include/com_err.h:32");' ;
+select target 'item(et_old_error_hook_func);' ;
+mark_arg_uses 2 valist ;
+print_marks ;
+# retype_argument '::std::ffi::VaList' ;
+
+
+# reorganize_definitions ;
+# commit ;

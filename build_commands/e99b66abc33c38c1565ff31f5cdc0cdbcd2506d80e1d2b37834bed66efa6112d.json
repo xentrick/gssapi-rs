@@ -1,0 +1,26 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/authdata/greet_server",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,greet_server.so.1",
+        "-Wl,--no-undefined",
+        "-o",
+        "greet_server.so",
+        "greet_auth.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5",
+        "-lcom_err",
+        "-lk5crypto",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

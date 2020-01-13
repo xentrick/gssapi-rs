@@ -1,0 +1,25 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/util/et",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,libcom_err.so.3",
+        "-Wl,--no-undefined",
+        "-o",
+        "libcom_err.so.3.0",
+        "error_message.so",
+        "et_name.so",
+        "com_err.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../lib",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/plugins/localauth/test",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,localauth_test.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "localauth_test.so",
+        "main.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../../lib",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

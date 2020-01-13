@@ -1,0 +1,30 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/util/profile",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,libprofile.so.1",
+        "-Wl,--no-undefined",
+        "-o",
+        "libprofile.so.1.1",
+        "prof_tree.so",
+        "prof_file.so",
+        "prof_parse.so",
+        "prof_get.so",
+        "prof_set.so",
+        "prof_err.so",
+        "prof_init.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../lib",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}

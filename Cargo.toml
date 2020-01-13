@@ -17,6 +17,8 @@ crate-type = ["staticlib", "rlib"]
 
 
 [dependencies]
+c2rust-bitfields = "0.3"
+c2rust-asm-casts = "0.1"
 libc = "0.2"
 
 

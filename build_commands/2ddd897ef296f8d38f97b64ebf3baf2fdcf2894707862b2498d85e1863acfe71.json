@@ -1,0 +1,33 @@
+{
+    "type": "cc",
+    "directory": "/home/nmavis/dev/gssapi-rs/code/src/lib/krad",
+    "arguments": [
+        "cc",
+        "-shared",
+        "-fPIC",
+        "-Wl,-h,libkrad.so.0",
+        "-Wl,--no-undefined",
+        "-o",
+        "libkrad.so.0.0",
+        "attr.so",
+        "attrset.so",
+        "client.so",
+        "code.so",
+        "packet.so",
+        "remote.so",
+        "-Wl,--enable-new-dtags",
+        "-Wl,-rpath",
+        "-Wl,/usr/local/lib",
+        "-L../../lib",
+        "-lkrb5",
+        "-lk5crypto",
+        "-lcom_err",
+        "-lkrb5support",
+        "-lkeyutils",
+        "-lresolv",
+        "-ldl",
+        "-lverto",
+        "-Wl,--version-script",
+        "binutils.versions"
+    ]
+}
